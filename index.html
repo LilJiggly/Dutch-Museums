@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dutch Museums Explorer</title>
+    <!-- Modern CSS System -->
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/design-system.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/museum-cards.css" />
+    <link rel="stylesheet" href="css/list-view-modern.css" />
+    <link rel="stylesheet" href="css/modal-modern.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/interactive-enhancements.css" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-content">
+        <a href="#" class="logo">
+          <span class="logo-icon">🏛️</span>
+          <span class="logo-text">Dutch Museums</span>
+        </a>
+        <div id="current-time" class="time-display">Loading...</div>
+      </div>
+    </header>
+
+    <nav class="navigation">
+      <div class="nav-grid">
+        <div class="nav-section search-section">
+          <label class="nav-label" for="search-input">
+            <span class="nav-label-icon">🔍</span>
+            Search museums
+          </label>
+          <div class="search-container">
+            <input
+              type="text"
+              id="search-input"
+              class="input search-input"
+              placeholder="Search by name, location, description, facilities..."
+            />
+            <button
+              id="clear-search"
+              class="search-clear-btn"
+              title="Clear search"
+            >
+              ×
+            </button>
+          </div>
+          <div id="search-suggestions" class="search-suggestions"></div>
+        </div>
+
+        <div class="nav-section">
+          <label class="nav-label" for="visit-date">
+            <span class="nav-label-icon">📅</span>
+            Plan your visit
+          </label>
+          <input type="date" id="visit-date" class="input" />
+          <button id="today-btn" class="btn btn-secondary btn-sm">Today</button>
+        </div>
+
+        <div class="nav-section">
+          <label class="nav-label" for="status-filter">
+            <span class="nav-label-icon">🔍</span>
+            Filter by status
+          </label>
+          <select id="status-filter" class="input select">
+            <option value="all">All museums</option>
+            <option value="open">Currently open</option>
+            <option value="closed">Currently closed</option>
+            <option value="unknown">Hours unknown</option>
+          </select>
+        </div>
+
+        <div class="nav-section">
+          <label class="nav-label" for="card-filter">
+            <span class="nav-label-icon">🎫</span>
+            Museum card
+          </label>
+          <select id="card-filter" class="input select">
+            <option value="all">All museums</option>
+            <option value="yes">Accepts museum card</option>
+            <option value="no">No museum card</option>
+          </select>
+        </div>
+
+        <div class="nav-section">
+          <label class="nav-label">
+            <span class="nav-label-icon">👁️</span>
+            View mode
+          </label>
+          <div class="toggle-group">
+            <button id="grid-view" class="toggle-btn active">
+              <span>⊞</span> Grid
+            </button>
+            <button id="list-view" class="toggle-btn">
+              <span>☰</span> List
+            </button>
+          </div>
+        </div>
+
+        <div class="nav-section">
+          <label class="nav-label">
+            <span class="nav-label-icon">⚙️</span>
+            Actions
+          </label>
+          <div style="display: flex; gap: var(--space-2)">
+            <button id="clear-filters" class="btn btn-ghost btn-sm">
+              Clear filters
+            </button>
+            <button id="toggle-details" class="btn btn-secondary btn-sm">
+              Show details
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div id="results-info" class="results-info"></div>
+      <div id="cards" class="cards-container"></div>
+    </main>
+
+    <!-- Modern Museum Detail Modal -->
+    <div id="museum-modal" class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modal-title" class="modal-title">Museum Details</h2>
+          <button class="modal-close" onclick="closeMuseumModal()">×</button>
+        </div>
+        <div class="modal-body">
+          <div id="museum-modal-body">
+            <div class="modal-loading">
+              <div class="modal-loading-spinner"></div>
+              Loading museum details...
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="scripts/config.js"></script>
+    <script src="scripts/data-loader.js"></script>
+    <script src="scripts/time-utils.js"></script>
+    <script src="scripts/formatters.js"></script>
+    <script src="scripts/modal.js"></script>
+    <script src="scripts/search.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/navigation.js"></script>
+    <script src="scripts/main.js"></script>
+  </body>
+</html>

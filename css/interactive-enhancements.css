@@ -1,0 +1,315 @@
+/* Interactive Enhancements */
+
+/* Enhanced hover states */
+.museum-card,
+.list-museum-card {
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.museum-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04), 0 0 0 1px var(--primary-100);
+}
+
+.list-museum-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Interactive status indicators */
+.museum-status {
+  position: relative;
+  overflow: hidden;
+}
+
+.museum-status::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.8s ease-out;
+}
+
+.museum-card:hover .museum-status::before,
+.list-museum-card:hover .museum-status::before {
+  left: 100%;
+}
+
+/* Enhanced button interactions */
+.btn {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-500));
+  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3),
+    0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.btn-secondary:hover {
+  background: var(--neutral-100);
+  border-color: var(--neutral-400);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-ghost:hover {
+  background: var(--neutral-50);
+  transform: translateY(-1px);
+}
+
+/* Interactive form elements */
+.input,
+.select {
+  position: relative;
+  transition: all var(--transition-normal);
+}
+
+.input:hover,
+.select:hover {
+  border-color: var(--primary-300);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.input:focus,
+.select:focus {
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1),
+    0 4px 12px rgba(59, 130, 246, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Toggle button enhancements */
+.toggle-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.toggle-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-500);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  z-index: -1;
+}
+
+.toggle-btn.active::before {
+  opacity: 0.1;
+}
+
+.toggle-btn:hover::before {
+  opacity: 0.05;
+}
+
+.toggle-btn.active:hover::before {
+  opacity: 0.15;
+}
+
+/* Card action enhancements */
+.museum-card-actions,
+.list-card-actions {
+  opacity: 0.8;
+  transition: opacity var(--transition-normal);
+}
+
+.museum-card:hover .museum-card-actions,
+.list-museum-card:hover .list-card-actions {
+  opacity: 1;
+}
+
+/* Image overlay effects */
+.museum-card-image-container,
+.list-card-image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.museum-card-image-container::after,
+.list-card-image-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.museum-card:hover .museum-card-image-container::after,
+.list-museum-card:hover .list-card-image-container::after {
+  opacity: 1;
+}
+
+/* Navigation enhancements */
+.nav-section {
+  transition: all var(--transition-normal);
+}
+
+.nav-section:hover {
+  transform: translateY(-1px);
+}
+
+.nav-label {
+  transition: color var(--transition-fast);
+}
+
+.nav-section:hover .nav-label {
+  color: var(--primary-600);
+}
+
+/* Results info enhancements */
+.results-info {
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.results-info::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: var(--primary-500);
+  transition: width var(--transition-slow);
+}
+
+.results-info:hover::before {
+  width: 100%;
+}
+
+/* Modal enhancements */
+.modal-close {
+  transition: all var(--transition-fast);
+}
+
+.modal-close:hover {
+  background: var(--red-100);
+  color: var(--red-600);
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* Facility tag interactions */
+.facility-tag,
+.list-facility-tag {
+  cursor: default;
+  transition: all var(--transition-fast);
+}
+
+.facility-tag:hover,
+.list-facility-tag:hover {
+  background: var(--primary-50);
+  border-color: var(--primary-200);
+  color: var(--primary-700);
+  transform: translateY(-1px) scale(1.05);
+}
+
+/* Header enhancements */
+.header {
+  transition: all var(--transition-normal);
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.logo-icon {
+  transition: transform var(--transition-normal);
+}
+
+.logo:hover .logo-icon {
+  transform: rotate(10deg) scale(1.1);
+}
+
+/* Time display enhancements */
+.time-display {
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.time-display:hover {
+  color: var(--primary-600);
+  transform: scale(1.02);
+}
+
+/* Scroll enhancements */
+.cards-container {
+  scroll-behavior: smooth;
+}
+
+/* Selection enhancements */
+::selection {
+  background: var(--primary-100);
+  color: var(--primary-900);
+}
+
+::-moz-selection {
+  background: var(--primary-100);
+  color: var(--primary-900);
+}
+
+/* Focus visible enhancements */
+.btn:focus-visible,
+.input:focus-visible,
+.select:focus-visible,
+.toggle-btn:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
+}
+
+/* Loading state enhancements */
+.loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}

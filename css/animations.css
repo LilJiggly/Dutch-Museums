@@ -1,0 +1,261 @@
+/* Modern Animations and Micro-interactions */
+
+/* Loading animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  53%,
+  80%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  40%,
+  43% {
+    transform: translate3d(0, -8px, 0);
+  }
+  70% {
+    transform: translate3d(0, -4px, 0);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+/* Card entrance animations */
+.museum-card,
+.list-museum-card {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.museum-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.museum-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.museum-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.museum-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.museum-card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.museum-card:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+/* Navigation animations */
+.nav-section {
+  animation: slideIn 0.5s ease-out;
+}
+
+.nav-section:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.nav-section:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.nav-section:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.nav-section:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.nav-section:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+/* Button hover animations */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+/* Status indicator animations */
+.museum-status.open .museum-status-icon::before {
+  animation: pulse 2s infinite;
+}
+
+.museum-status.closed .museum-status-icon::before {
+  animation: none;
+}
+
+/* Modal animations */
+.modal-overlay {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+  animation: slideIn 0.4s ease-out;
+}
+
+/* Loading spinner */
+.modal-loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+/* Results info animation */
+.results-info {
+  animation: slideIn 0.5s ease-out;
+}
+
+/* Toggle button animations */
+.toggle-btn {
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.toggle-btn::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--primary-500);
+  transition: all var(--transition-normal);
+  transform: translateX(-50%);
+}
+
+.toggle-btn.active::after {
+  width: 80%;
+}
+
+/* Facility tag animations */
+.facility-tag,
+.list-facility-tag {
+  transition: all var(--transition-fast);
+}
+
+.facility-tag:hover,
+.list-facility-tag:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Image hover effects */
+.museum-card-image,
+.list-card-image {
+  transition: transform var(--transition-slow);
+}
+
+.museum-card:hover .museum-card-image,
+.list-museum-card:hover .list-card-image {
+  transform: scale(1.05);
+}
+
+/* Focus animations */
+.input:focus,
+.select:focus {
+  animation: bounce 0.6s ease-out;
+}
+
+/* Stagger animation utility */
+.stagger-animation > * {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.stagger-animation > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.stagger-animation > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.stagger-animation > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.stagger-animation > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.stagger-animation > *:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.stagger-animation > *:nth-child(6) {
+  animation-delay: 0.6s;
+}
+.stagger-animation > *:nth-child(7) {
+  animation-delay: 0.7s;
+}
+.stagger-animation > *:nth-child(8) {
+  animation-delay: 0.8s;
+}
+.stagger-animation > *:nth-child(9) {
+  animation-delay: 0.9s;
+}
+.stagger-animation > *:nth-child(10) {
+  animation-delay: 1s;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

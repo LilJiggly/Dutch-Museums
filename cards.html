@@ -1,0 +1,62 @@
+<div class="museum-card">
+  <img class="museum-card-image" src="{{IMAGE}}" alt="{{NAME}}" />
+
+  <div class="museum-card-content">
+    <div class="museum-card-header">
+      <h3 class="museum-card-title">{{NAME}}</h3>
+      <div class="status-container">
+        <div class="museum-status {{STATUS_CLASS}}">
+          <span class="museum-status-icon"></span>
+          {{OPEN_TODAY}}
+        </div>
+        {{NEXT_OPENING}}
+      </div>
+    </div>
+
+    <div class="museum-info">
+      <div class="info-item">
+        <span class="info-icon">📍</span>
+        <div class="info-content">
+          <div class="info-label">Address</div>
+          {{ADDRESS}}
+        </div>
+      </div>
+
+      <div class="info-item">
+        <span class="info-icon">📞</span>
+        <div class="info-content">
+          <div class="info-label">Phone</div>
+          {{PHONE}}
+        </div>
+      </div>
+
+      <div class="info-item">
+        <span class="info-icon">🎫</span>
+        <div class="info-content">
+          <div class="info-label">Museum Card</div>
+          {{CARD}}
+        </div>
+      </div>
+    </div>
+
+    <div class="hidden-details">
+      <div class="opening-hours">{{HOURS}}</div>
+
+      <div class="description-content">{{DESCRIPTION_BLOCKS}}</div>
+
+      <div class="facilities-list">{{FACILITIES}}</div>
+    </div>
+
+    <div class="museum-card-actions">
+      <a href="{{MAPS}}" target="_blank" class="btn btn-secondary btn-sm">
+        🗺️ Map
+      </a>
+      <button
+        class="btn btn-primary btn-sm"
+        onclick="openMuseumPage('{{MUSEUM_ID}}')"
+      >
+        View Details
+      </button>
+    </div>
+  </div>
+</div>
