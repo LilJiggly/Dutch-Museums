@@ -3,7 +3,6 @@
 /* Enhanced hover states */
 .museum-card,
 .list-museum-card {
-  cursor: pointer;
   transition: all var(--transition-normal);
 }
 
@@ -183,6 +182,8 @@
   color: var(--primary-600);
 }
 
+/* Ensure cursor pointer is maintained during nav section hover */
+
 /* Results info enhancements */
 .results-info {
   transition: all var(--transition-normal);
@@ -198,10 +199,7 @@
   height: 2px;
   background: var(--primary-500);
   transition: width var(--transition-slow);
-}
-
-.results-info:hover::before {
-  width: 100%;
+  pointer-events: none;
 }
 
 /* Modal enhancements */
@@ -218,7 +216,6 @@
 /* Facility tag interactions */
 .facility-tag,
 .list-facility-tag {
-  cursor: default;
   transition: all var(--transition-fast);
 }
 

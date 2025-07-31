@@ -63,19 +63,17 @@ function setupNavigation(templates, data) {
     applyFilters();
   });
 
-  // Toggle details visibility
-  let detailsVisible = false;
+  // Toggle opening hours visibility
+  let hoursVisible = false;
   toggleDetailsBtn.addEventListener("click", () => {
-    detailsVisible = !detailsVisible;
-    const hiddenElements = document.querySelectorAll(".hidden-details");
+    hoursVisible = !hoursVisible;
+    const openingHoursElements = document.querySelectorAll(".opening-hours");
 
-    hiddenElements.forEach((element) => {
-      element.style.display = detailsVisible ? "block" : "none";
+    openingHoursElements.forEach((element) => {
+      element.style.display = hoursVisible ? "block" : "none";
     });
 
-    toggleDetailsBtn.textContent = detailsVisible
-      ? "Hide Details"
-      : "Show Details";
+    toggleDetailsBtn.textContent = hoursVisible ? "Hide Hours" : "Show Hours";
   });
 
   // View switching

@@ -91,12 +91,15 @@ function getCurrentOpeningStatus(data) {
       className: "status-closed",
     };
   } else {
+    const openTime = `${timeRange.open.hour
+      .toString()
+      .padStart(2, "0")}:${timeRange.open.minute.toString().padStart(2, "0")}`;
     const closeTime = `${timeRange.close.hour
       .toString()
       .padStart(2, "0")}:${timeRange.close.minute.toString().padStart(2, "0")}`;
     return {
       status: "open",
-      message: `00:00 - ${closeTime}`,
+      message: `Open until ${closeTime}`,
       className: "status-open",
     };
   }

@@ -89,58 +89,6 @@ function filterMuseums(data, filters) {
 }
 
 function renderFilteredResults(templates, data, filters) {
-  CONFIG.container.innerHTML = "";
-  const filteredData = filterMuseums(data, filters);
-
-  // Choose template based on current view
-  const template =
-    currentView === "grid" ? templates.gridTemplate : templates.listTemplate;
-
-  // Update container class for styling
-  CONFIG.container.className =
-    currentView === "grid"
-      ? "cards-container stagger-animation"
-      : "cards-container list-view stagger-animation";
-
-  filteredData.forEach((museum, filteredIndex) => {
-    // Find the original index of this museum in the full dataset
-    const originalIndex = data.findIndex((m) => m === museum);
-    const html = renderCard(template, museum, originalIndex);
-    CONFIG.container.insertAdjacentHTML("beforeend", html);
-  });
-
-  // Add click handlers to make entire cards clickable
-  const cards = CONFIG.container.querySelectorAll(
-    ".museum-card, .list-museum-card"
-  );
-  cards.forEach((card, domIndex) => {
-    card.addEventListener("click", (e) => {
-      // Don't trigger if clicking on a button or link
-      if (
-        e.target.tagName === "BUTTON" ||
-        e.target.tagName === "A" ||
-        e.target.closest("button") ||
-        e.target.closest("a")
-      ) {
-        return;
-      }
-
-      // Get the original museum index from the filtered data
-      const museum = filteredData[domIndex];
-      const originalIndex = data.findIndex((m) => m === museum);
-      const museumId = `museum-${originalIndex}`;
-      openMuseumPage(museumId);
-    });
-  });
-
-  // Update results info
-  const resultsInfo = document.getElementById("results-info");
-  const total = data.length;
-  const shown = filteredData.length;
-
-  if (shown === total) {
-    resultsInfo.textContent = `Showing all ${total} museums`;
-  } else {
-    resultsInfo.textContent = `Showing ${shown} of ${total} museums`;
-  }
+  // Use lazy loading system for better performance
+  renderFilteredResultsWithLazyLoading(templates, data, filters);
 }

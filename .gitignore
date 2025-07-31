@@ -85,6 +85,11 @@ css/list-view.css
 css/modal.css
 css/navigation.css
 
+# Development CSS files
+css/*.old.css
+css/*.backup.css
+css/temp_*.css
+
 # Log Files
 *.log
 logs/
@@ -94,11 +99,35 @@ scraping_logs/
 # Scraping and processing files
 data/detail_urls.json
 data/wednesday_hours_*.csv
+data/museum_websites_*.csv
+data/museum_website_links_*.csv
 data/merge_report_*.txt
+data/website_merge_report_*.txt
+data/website_links_merge_report_*.txt
 data/wednesday_scraping_errors_*.txt
+data/website_scraping_errors_*.txt
+data/website_link_errors_*.txt
 data/covert_csv_to_json.py
 data/*_backup_*.json
 data/*_with_wednesday_*.json
+data/*_with_websites_*.json
+
+# Generated/timestamped data files (keep for reference but don't track)
+data/museum_details_full_with_websites_*.json
+data/*_20*.csv
+data/*_20*.json
+data/*_20*.txt
+
+# Admin panel data (local changes only)
+# Note: Keep the original JSON but ignore admin-generated exports
+data/museum_details_full_*.json
+!data/museum_details_full.json
+
+# Development and testing files
+needs.txt
+test_*.html
+debug_*.js
+*.test.js
 
 # Old/backup data files
 data/old/

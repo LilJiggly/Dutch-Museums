@@ -23,14 +23,6 @@
       </div>
 
       <div class="info-item">
-        <span class="info-icon">📞</span>
-        <div class="info-content">
-          <div class="info-label">Phone</div>
-          {{PHONE}}
-        </div>
-      </div>
-
-      <div class="info-item">
         <span class="info-icon">🎫</span>
         <div class="info-content">
           <div class="info-label">Museum Card</div>
@@ -39,24 +31,12 @@
       </div>
     </div>
 
-    <div class="hidden-details">
-      <div class="opening-hours">{{HOURS}}</div>
+    <div class="opening-hours" style="display: none">{{HOURS}}</div>
 
+    <div class="hidden-details">
       <div class="description-content">{{DESCRIPTION_BLOCKS}}</div>
 
       <div class="facilities-list">{{FACILITIES}}</div>
-    </div>
-
-    <div class="museum-card-actions">
-      <a href="{{MAPS}}" target="_blank" class="btn btn-secondary btn-sm">
-        🗺️ Map
-      </a>
-      <button
-        class="btn btn-primary btn-sm"
-        onclick="openMuseumPage('{{MUSEUM_ID}}')"
-      >
-        View Details
-      </button>
     </div>
   </div>
 </div>

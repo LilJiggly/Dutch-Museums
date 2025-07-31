@@ -32,17 +32,52 @@
     museumData = data;
     window.currentTemplates = templates;
 
+    // Initialize lazy loading system
+    initializeLazyLoading();
+
     // Setup navigation and initial render
     setupNavigation(templates, data);
 
-    // Update status every minute to keep it current
+    // Handle window resize to reload templates if needed
+    let resizeTimeout;
+    let wasMobile = isMobileDevice();
+
+    window.addEventListener("resize", async () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(async () => {
+        const isMobileNow = isMobileDevice();
+
+        // If mobile state changed, reload templates and re-render
+        if (wasMobile !== isMobileNow) {
+          wasMobile = isMobileNow;
+
+          try {
+            const newTemplates = await loadTemplates();
+            window.currentTemplates = newTemplates;
+
+            // Re-render current view with new templates
+            const filters = {
+              search: document.getElementById("search-input")?.value || "",
+              status: document.getElementById("status-filter").value,
+              card: document.getElementById("card-filter").value,
+            };
+            renderFilteredResults(newTemplates, data, filters);
+          } catch (error) {
+            console.error("Failed to reload templates on resize:", error);
+          }
+        }
+      }, 250);
+    });
+
+    // Update status every 5 minutes to keep it current (less frequent refreshing)
     setInterval(() => {
       const filters = {
+        search: document.getElementById("search-input")?.value || "",
         status: document.getElementById("status-filter").value,
         card: document.getElementById("card-filter").value,
       };
       renderFilteredResults(templates, data, filters);
-    }, 60000); // 60 seconds
+    }, 300000); // 5 minutes (300 seconds)
 
     // Time display is already handled in the header, no need to create another one
 

@@ -2,25 +2,28 @@
 
 .list-museum-card {
   background: white;
-  border-radius: var(--radius-2xl);
-  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
   border: 1px solid var(--neutral-200);
   overflow: hidden;
   transition: all var(--transition-normal);
   display: flex;
   align-items: stretch;
+  position: relative;
+  min-height: 120px;
 }
 
 .list-museum-card:hover {
   box-shadow: var(--shadow-xl);
   transform: translateY(-2px);
   border-color: var(--primary-200);
+  background: linear-gradient(135deg, white 0%, var(--primary-25) 100%);
 }
 
 .list-card-image-container {
   flex-shrink: 0;
-  width: 200px;
-  height: 160px;
+  width: 160px;
+  /* height: 100%; */
   overflow: hidden;
   position: relative;
 }
@@ -38,52 +41,80 @@
 
 .list-card-content {
   flex: 1;
-  padding: var(--space-6);
+  padding: var(--space-4);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .list-card-header {
-  margin-bottom: var(--space-4);
+  margin-bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.list-card-title-section {
+  flex: 1;
+  min-width: 0; /* Allow text to truncate */
 }
 
 .list-card-title {
   font-family: var(--font-display);
-  font-size: 1.375rem;
+  font-size: 1.25rem;
   font-weight: 500;
   color: var(--neutral-900);
-  margin: 0 0 var(--space-3) 0;
+  margin: 0 0 var(--space-2) 0;
   line-height: 1.3;
+  background: linear-gradient(135deg, var(--neutral-900), var(--primary-700));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.list-card-meta {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: var(--space-4);
+.list-museum-card .museum-status {
+  margin-top: 0;
 }
 
-.list-card-meta .status-container {
+.museum-status.next-opening-card {
+  padding-left: var(--space-1);
+}
+
+.status-container {
   display: flex;
   flex-direction: column;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+}
+
+.list-card-actions-top {
+  display: flex;
   gap: var(--space-2);
-  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.list-card-actions-top .btn {
+  padding: var(--space-2) var(--space-3);
+  font-size: 0.8125rem;
+  min-width: auto;
 }
 
 .list-card-info {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--space-4);
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-3);
 }
 
 .list-info-item {
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: var(--neutral-700);
+  flex: 1;
+  min-width: 140px;
 }
 
 .list-info-icon {
@@ -95,20 +126,15 @@
 .list-info-text {
   flex: 1;
   min-width: 0;
-}
-
-.list-info-label {
-  font-weight: 600;
-  color: var(--neutral-900);
-  display: block;
-  margin-bottom: var(--space-1);
+  font-size: 0.8125rem;
+  line-height: 1.4;
 }
 
 .list-card-actions {
   display: flex;
-  gap: var(--space-3);
+  gap: var(--space-2);
   align-items: center;
-  padding-top: var(--space-4);
+  padding-top: var(--space-3);
   border-top: 1px solid var(--neutral-200);
 }
 
@@ -124,49 +150,112 @@
 }
 
 .list-facility-tag {
-  background: var(--neutral-100);
-  color: var(--neutral-600);
-  padding: var(--space-1) var(--space-2);
-  border-radius: var(--radius-sm);
+  background: var(--primary-100);
+  color: var(--primary-700);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-lg);
   font-size: 0.75rem;
   font-weight: 500;
-  border: 1px solid var(--neutral-200);
+  border: 1px solid var(--primary-200);
+  transition: all var(--transition-fast);
+}
+
+.list-facility-tag:hover {
+  background: var(--primary-200);
+  transform: translateY(-1px);
+}
+
+/* Enhanced List View Styling - removed hover line */
+
+.list-info-icon {
+  background: var(--primary-50);
+  border-radius: var(--radius-md);
+  padding: var(--space-1);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
 }
 
 /* Responsive List View */
 @media (max-width: 768px) {
+  /* Compact mobile list view */
   .list-museum-card {
-    flex-direction: column;
+    flex-direction: row;
+    min-height: 100px;
+    border-radius: var(--radius-lg);
   }
 
   .list-card-image-container {
-    width: 100%;
-    height: 200px;
+    width: 100px;
+    height: 100px;
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
   }
 
-  .list-card-meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-3);
+  .list-card-content {
+    padding: var(--space-3);
+    justify-content: center;
   }
 
-  .list-card-info {
-    grid-template-columns: 1fr;
-    gap: var(--space-3);
+  .list-card-header {
+    margin-bottom: 0;
   }
 
-  .list-card-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .list-card-actions .btn {
+  .list-card-title-section {
     flex: 1;
   }
 
-  .list-card-facilities {
-    margin-left: 0;
-    margin-top: var(--space-3);
+  .list-card-title {
+    font-size: 1rem;
+    margin-bottom: var(--space-1);
+    line-height: 1.2;
+  }
+
+  .status-container {
+    margin-top: var(--space-1);
+  }
+
+  /* Compact status styling */
+  .museum-status {
+    font-size: 0.75rem;
+    padding: var(--space-1) var(--space-2);
+  }
+
+  .next-opening-card {
+    font-size: 0.75rem;
+    padding: var(--space-1) var(--space-2);
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra compact for very small screens */
+  .list-museum-card {
+    min-height: 90px;
+  }
+
+  .list-card-image-container {
+    width: 80px;
+    height: 90px;
+  }
+
+  .list-card-title {
+    font-size: 0.9rem;
+  }
+
+  .list-card-info {
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .list-info-item {
+    font-size: 0.7rem;
+  }
+
+  .list-card-actions-top .btn {
+    padding: var(--space-1);
+    font-size: 0.7rem;
   }
 }
 
@@ -195,9 +284,44 @@
   }
 }
 
-/* Compact List View Option */
+/* Extra Compact List View */
 .list-view-compact .list-museum-card {
-  padding: var(--space-4);
+  min-height: 100px;
+  margin-bottom: var(--space-2);
+}
+
+.list-view-compact .list-card-image-container {
+  width: 120px;
+  height: 100px;
+}
+
+.list-view-compact .list-card-content {
+  padding: var(--space-3);
+}
+
+.list-view-compact .list-card-title {
+  font-size: 1.125rem;
+  margin-bottom: var(--space-1);
+}
+
+.list-view-compact .list-card-info {
+  margin-bottom: var(--space-2);
+  gap: var(--space-3);
+}
+
+.list-view-compact .list-info-item {
+  font-size: 0.75rem;
+  min-width: 120px;
+}
+
+.list-view-compact .list-card-actions {
+  padding-top: var(--space-2);
+  gap: var(--space-1);
+}
+
+.list-view-compact .btn-sm {
+  padding: var(--space-1) var(--space-3);
+  font-size: 0.75rem;
 }
 
 .list-view-compact .list-card-image-container {
@@ -220,4 +344,29 @@
 
 .list-view-compact .list-info-item {
   font-size: 0.8125rem;
+}
+
+/* Mobile-specific list card styles */
+.mobile-list-card {
+  /* These styles will be applied when using the mobile template */
+}
+
+/* Additional mobile optimizations */
+@media (max-width: 768px) {
+  .mobile-list-card .list-card-title {
+    font-size: 1rem;
+    line-height: 1.2;
+    margin-bottom: var(--space-1);
+  }
+
+  .mobile-list-card .museum-status {
+    font-size: 0.75rem;
+    padding: var(--space-1) var(--space-2);
+  }
+
+  .mobile-list-card .list-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }

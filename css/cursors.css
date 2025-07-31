@@ -1,0 +1,149 @@
+/* Cursor Management System */
+
+/* Interactive Elements - Pointer Cursor */
+button,
+.btn,
+.toggle-btn,
+select,
+.select,
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="checkbox"],
+input[type="radio"],
+.search-clear-btn,
+.search-suggestion,
+.museum-card,
+.list-museum-card,
+.mobile-list-card,
+.modal-close,
+a[href],
+label[for] {
+  cursor: pointer;
+}
+
+/* Navigation Elements */
+.navigation button,
+.navigation select,
+.navigation input[type="date"],
+.nav-section button,
+.nav-section select,
+.nav-section input {
+  cursor: pointer;
+}
+
+/* Specific Element IDs */
+#grid-view,
+#list-view,
+#clear-filters,
+#toggle-details,
+#today-btn,
+#status-filter,
+#card-filter,
+#visit-date {
+  cursor: pointer;
+}
+
+/* Text Input Areas */
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="password"],
+input[type="url"],
+input[type="tel"],
+textarea,
+.search-input {
+  cursor: text;
+}
+
+/* Non-Interactive Elements */
+.facility-tag,
+.list-facility-tag,
+.nav-label,
+.nav-label-icon,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span:not(.clickable),
+div:not(.clickable) {
+  cursor: default;
+}
+
+.logo * {
+  cursor: pointer !important;
+}
+
+/* Disabled Elements */
+button:disabled,
+.btn:disabled,
+select:disabled,
+input:disabled {
+  cursor: not-allowed;
+}
+
+/* Loading States */
+.loading,
+.loading * {
+  cursor: wait;
+}
+
+/* Prevent pseudo-elements from interfering with cursor */
+*::before,
+*::after {
+  pointer-events: none;
+}
+/* Ensure entire card area shows pointer cursor */
+.museum-card,
+.museum-card *:not(input):not(textarea),
+.list-museum-card,
+.list-museum-card *:not(input):not(textarea),
+.mobile-list-card,
+.mobile-list-card *:not(input):not(textarea) {
+  cursor: pointer;
+}
+
+/* Card content areas */
+.museum-card-content,
+.list-card-content,
+.museum-card-image,
+.list-card-image,
+.museum-card-title,
+.list-card-title,
+.museum-card-header,
+.list-card-header {
+  cursor: pointer;
+}
+/* Search suggestion elements */
+.search-suggestions,
+.search-suggestions div,
+.search-suggestion,
+.search-suggestion *,
+.search-suggestion-name,
+.search-suggestion-details {
+  cursor: pointer;
+}
+/* Modal website links */
+.modal-info-value a,
+.modal-content a {
+  cursor: pointer;
+}
+/* Admin interface elements */
+.admin-tab,
+.museum-item,
+.form-group input,
+.form-group select,
+.form-group textarea {
+  cursor: pointer;
+}
+
+.form-group input,
+.form-group textarea {
+  cursor: text;
+}

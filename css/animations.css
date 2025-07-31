@@ -249,6 +249,60 @@
   animation-delay: 1s;
 }
 
+/* Lazy Loading Animations */
+#lazy-loading-indicator {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-8);
+  margin: var(--space-8) 0;
+}
+
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  color: var(--neutral-600);
+  font-size: 0.875rem;
+}
+
+.loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--neutral-200);
+  border-top: 2px solid var(--primary-500);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+#load-more-btn {
+  display: flex;
+  justify-content: center;
+  margin: var(--space-8) 0;
+}
+
+.load-more-button {
+  padding: var(--space-4) var(--space-8);
+  font-size: 1rem;
+  min-width: 200px;
+}
+
+/* Stagger animation for lazy loaded cards */
+.cards-container > *:nth-child(n) {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -258,4 +312,60 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+
+  .loading-spinner {
+    animation: none;
+  }
+}
+/* Loading spinner animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Loading indicator styles */
+.loading-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+  text-align: center;
+  color: var(--neutral-600);
+  background: white;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  margin: var(--space-4) auto;
+  max-width: 300px;
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--neutral-200);
+  border-top: 3px solid var(--primary-500);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: var(--space-3);
+}
+
+.load-more-button {
+  margin: var(--space-8) auto;
+  display: block;
+}
+
+#lazy-loading-indicator {
+  display: flex;
+  justify-content: center;
+  margin: var(--space-4) 0;
+}
+
+#load-more-btn {
+  display: flex;
+  justify-content: center;
+  margin: var(--space-8) 0;
 }

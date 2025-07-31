@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/modal-modern.css" />
     <link rel="stylesheet" href="css/animations.css" />
     <link rel="stylesheet" href="css/interactive-enhancements.css" />
+    <link rel="stylesheet" href="css/cursors.css" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   </head>
   <body>
@@ -22,7 +23,16 @@
           <span class="logo-icon">🏛️</span>
           <span class="logo-text">Dutch Museums</span>
         </a>
-        <div id="current-time" class="time-display">Loading...</div>
+        <div class="header-actions">
+          <a
+            href="admin.html"
+            class="btn btn-ghost btn-sm admin-btn"
+            title="Admin Panel"
+          >
+            🔧 Admin
+          </a>
+          <div id="current-time" class="time-display">Loading...</div>
+        </div>
       </div>
     </header>
 
@@ -110,7 +120,7 @@
               Clear filters
             </button>
             <button id="toggle-details" class="btn btn-secondary btn-sm">
-              Show details
+              Show Hours
             </button>
           </div>
         </div>
@@ -147,6 +157,7 @@
     <script src="scripts/formatters.js"></script>
     <script src="scripts/modal.js"></script>
     <script src="scripts/search.js"></script>
+    <script src="scripts/lazy-loading.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/navigation.js"></script>
     <script src="scripts/main.js"></script>

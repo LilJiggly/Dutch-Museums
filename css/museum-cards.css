@@ -2,7 +2,7 @@
 
 .museum-card {
   background: white;
-  border-radius: var(--radius-2xl);
+  border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
   border: 1px solid var(--neutral-200);
   overflow: hidden;
@@ -28,7 +28,7 @@
 }
 
 .museum-card-content {
-  padding: var(--space-6);
+  padding: var(--space-4);
 }
 
 .museum-card-header {
@@ -59,6 +59,7 @@
   font-size: 0.875rem;
   font-weight: 500;
   border: 1px solid;
+  width: fit-content;
 }
 
 .museum-status.status-open {
@@ -148,10 +149,6 @@
   gap: var(--space-3);
   padding-top: var(--space-4);
   border-top: 1px solid var(--neutral-200);
-}
-
-.museum-card-actions .btn {
-  flex: 1;
 }
 
 /* Hidden Details */

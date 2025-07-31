@@ -8,8 +8,6 @@ function openMuseumPage(museumId) {
     return;
   }
 
-  console.log("Opening museum:", museum["Name"], "Index:", index);
-
   const modal = document.getElementById("museum-modal");
   const modalBody = document.getElementById("museum-modal-body");
   const modalTitle = document.getElementById("modal-title");
@@ -38,6 +36,16 @@ function openMuseumPage(museumId) {
             <a href="${
               museum["Google Maps"] || "#"
             }" target="_blank">View on Google Maps</a>
+          </div>
+        </div>
+        <div class="modal-info-item">
+          <div class="modal-info-label">🌐 Website</div>
+          <div class="modal-info-value">
+            ${
+              museum["Official_Website"]
+                ? `<a href="${museum["Official_Website"]}" target="_blank">Visit Museum Website</a>`
+                : "-"
+            }
           </div>
         </div>
         <div class="modal-info-item">
@@ -96,6 +104,12 @@ function openMuseumPage(museumId) {
 
   // Store scroll position for restoration
   modal.dataset.scrollY = currentScrollY;
+
+  // Reset modal content scroll to top
+  const modalBodyElement = document.querySelector(".modal-body");
+  if (modalBodyElement) {
+    modalBodyElement.scrollTop = 0;
+  }
 }
 function closeMuseumModal() {
   const modal = document.getElementById("museum-modal");

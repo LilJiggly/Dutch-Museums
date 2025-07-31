@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Museum Admin Panel</title>
+    <!-- Modern CSS System -->
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/design-system.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/cursors.css" />
+    <style>
+      .admin-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: var(--space-8);
+      }
+
+      .admin-header {
+        background: var(--primary-600);
+        color: white;
+        padding: var(--space-6);
+        border-radius: var(--radius-xl);
+        margin-bottom: var(--space-8);
+        text-align: center;
+      }
+
+      .admin-tabs {
+        display: flex;
+        gap: var(--space-2);
+        margin-bottom: var(--space-8);
+        border-bottom: 2px solid var(--neutral-200);
+      }
+
+      .admin-tab {
+        padding: var(--space-4) var(--space-6);
+        background: transparent;
+        border: none;
+        border-bottom: 3px solid transparent;
+        font-weight: 500;
+        color: var(--neutral-600);
+        transition: all var(--transition-fast);
+      }
+
+      .admin-tab.active {
+        color: var(--primary-600);
+        border-bottom-color: var(--primary-600);
+      }
+
+      .admin-tab:hover {
+        color: var(--primary-500);
+        background: var(--primary-50);
+      }
+
+      .admin-panel {
+        display: none;
+        background: white;
+        border-radius: var(--radius-xl);
+        padding: var(--space-8);
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--neutral-200);
+      }
+
+      .admin-panel.active {
+        display: block;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--space-6);
+        margin-bottom: var(--space-6);
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+      }
+
+      .form-label {
+        font-weight: 600;
+        color: var(--neutral-700);
+        font-size: 0.875rem;
+      }
+
+      .form-textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .museum-list {
+        max-height: 400px;
+        overflow-y: auto;
+        border: 1px solid var(--neutral-200);
+        border-radius: var(--radius-lg);
+      }
+
+      .museum-item {
+        padding: var(--space-4);
+        border-bottom: 1px solid var(--neutral-100);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background-color var(--transition-fast);
+      }
+
+      .museum-item:hover {
+        background: var(--neutral-50);
+      }
+
+      .museum-item:last-child {
+        border-bottom: none;
+      }
+
+      .museum-name {
+        font-weight: 500;
+        color: var(--neutral-900);
+      }
+
+      .museum-address {
+        font-size: 0.875rem;
+        color: var(--neutral-600);
+        margin-top: var(--space-1);
+      }
+
+      .museum-actions {
+        display: flex;
+        gap: var(--space-2);
+      }
+
+      .status-message {
+        padding: var(--space-4);
+        border-radius: var(--radius-lg);
+        margin-bottom: var(--space-4);
+        display: none;
+      }
+
+      .status-success {
+        background: var(--success-50);
+        color: var(--success-700);
+        border: 1px solid var(--success-200);
+      }
+
+      .status-error {
+        background: var(--error-50);
+        color: var(--error-700);
+        border: 1px solid var(--error-200);
+      }
+
+      .back-link {
+        position: fixed;
+        top: var(--space-6);
+        right: var(--space-6);
+        z-index: 1000;
+      }
+
+      .login-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(
+          135deg,
+          var(--primary-50) 0%,
+          var(--primary-100) 100%
+        );
+      }
+
+      .login-box {
+        background: white;
+        padding: var(--space-8);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-xl);
+        border: 1px solid var(--neutral-200);
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+      }
+
+      .login-box h1 {
+        margin-bottom: var(--space-4);
+        color: var(--primary-600);
+      }
+
+      .login-box p {
+        margin-bottom: var(--space-6);
+        color: var(--neutral-600);
+      }
+
+      .login-box form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+      }
+
+      .change-item {
+        background: white;
+        border: 1px solid var(--neutral-200);
+        border-radius: var(--radius-lg);
+        padding: var(--space-4);
+        margin-bottom: var(--space-3);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .change-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--space-2);
+      }
+
+      .change-type {
+        padding: var(--space-1) var(--space-3);
+        border-radius: var(--radius-full);
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .change-type.added {
+        background: var(--success-100);
+        color: var(--success-700);
+      }
+
+      .change-type.edited {
+        background: var(--warning-100);
+        color: var(--warning-700);
+      }
+
+      .change-type.deleted {
+        background: var(--error-100);
+        color: var(--error-700);
+      }
+
+      .change-timestamp {
+        font-size: 0.875rem;
+        color: var(--neutral-500);
+      }
+
+      .change-details {
+        font-size: 0.875rem;
+        color: var(--neutral-700);
+      }
+
+      .change-museum-name {
+        font-weight: 600;
+        color: var(--neutral-900);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Login Screen -->
+    <div id="login-screen" class="login-container">
+      <div class="login-box">
+        <h1>🔐 Admin Access</h1>
+        <p>Enter the admin password to continue</p>
+        <form id="login-form">
+          <input
+            type="password"
+            id="admin-password"
+            class="input"
+            placeholder="Enter admin password"
+            required
+          />
+          <button type="submit" class="btn btn-primary">
+            Access Admin Panel
+          </button>
+        </form>
+        <div class="status-message" id="login-status"></div>
+        <a
+          href="index.html"
+          class="btn btn-ghost"
+          style="margin-top: var(--space-4)"
+        >
+          ← Back to Museums
+        </a>
+      </div>
+    </div>
+
+    <!-- Admin Panel (hidden by default) -->
+    <div id="admin-content" style="display: none">
+      <a href="index.html" class="btn btn-secondary back-link"
+        >← Back to Museums</a
+      >
+
+      <div class="admin-container">
+        <div class="admin-header">
+          <h1>🏛️ Museum Admin Panel</h1>
+          <p>Add new museums or edit existing ones</p>
+        </div>
+
+        <div class="admin-tabs">
+          <button class="admin-tab active" data-tab="add">➕ Add Museum</button>
+          <button class="admin-tab" data-tab="edit">✏️ Edit Museums</button>
+          <button class="admin-tab" data-tab="changelog">📋 Changes Log</button>
+          <button class="admin-tab" data-tab="export">💾 Export Data</button>
+        </div>
+
+        <!-- Add Museum Panel -->
+        <div id="add-panel" class="admin-panel active">
+          <h2>Add New Museum</h2>
+          <div class="status-message" id="add-status"></div>
+
+          <form id="add-museum-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="name">Museum Name *</label>
+                <input type="text" id="name" class="input" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="address">Address *</label>
+                <input type="text" id="address" class="input" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="phone">Phone</label>
+                <input type="text" id="phone" class="input" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="website">Official Website</label>
+                <input type="url" id="website" class="input" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="museum-card">Museum Card</label>
+                <select id="museum-card" class="input select">
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                  <option value="Unknown">Unknown</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="image">Image Path</label>
+                <input
+                  type="text"
+                  id="image"
+                  class="input"
+                  placeholder="images/museum_name.jpg"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="description">Description</label>
+              <textarea
+                id="description"
+                class="input form-textarea"
+                placeholder="Enter museum description..."
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="facilities"
+                >Facilities (comma-separated)</label
+              >
+              <textarea
+                id="facilities"
+                class="input"
+                placeholder="Parking, Restaurant, Gift Shop, Wheelchair Access"
+              ></textarea>
+            </div>
+
+            <h3>Opening Hours</h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="monday">Monday</label>
+                <input
+                  type="text"
+                  id="monday"
+                  class="input"
+                  placeholder="09:00 - 17:00 or Closed"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="tuesday">Tuesday</label>
+                <input
+                  type="text"
+                  id="tuesday"
+                  class="input"
+                  placeholder="09:00 - 17:00 or Closed"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="wednesday">Wednesday</label>
+                <input
+                  type="text"
+                  id="wednesday"
+                  class="input"
+                  placeholder="09:00 - 17:00 or Closed"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="thursday">Thursday</label>
+                <input
+                  type="text"
+                  id="thursday"
+                  class="input"
+                  placeholder="09:00 - 17:00 or Closed"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="friday">Friday</label>
+                <input
+                  type="text"
+                  id="friday"
+                  class="input"
+                  placeholder="09:00 - 17:00 or Closed"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="saturday">Saturday</label>
+                <input
+                  type="text"
+                  id="saturday"
+                  class="input"
+                  placeholder="09:00 - 17:00 or Closed"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="sunday">Sunday</label>
+                <input
+                  type="text"
+                  id="sunday"
+                  class="input"
+                  placeholder="09:00 - 17:00 or Closed"
+                />
+              </div>
+            </div>
+
+            <div
+              style="
+                display: flex;
+                gap: var(--space-4);
+                margin-top: var(--space-6);
+              "
+            >
+              <button type="submit" class="btn btn-primary">Add Museum</button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-action="clearForm"
+              >
+                Clear Form
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Edit Museums Panel -->
+        <div id="edit-panel" class="admin-panel">
+          <h2>Edit Museums</h2>
+          <div class="status-message" id="edit-status"></div>
+
+          <div style="margin-bottom: var(--space-6)">
+            <input
+              type="text"
+              id="search-museums"
+              class="input"
+              placeholder="Search museums to edit..."
+            />
+          </div>
+
+          <div id="museum-list" class="museum-list">
+            <!-- Museums will be loaded here -->
+          </div>
+        </div>
+
+        <!-- Changes Log Panel -->
+        <div id="changelog-panel" class="admin-panel">
+          <h2>📋 Changes Log</h2>
+          <div class="status-message" id="changelog-status"></div>
+
+          <div
+            style="
+              background: var(--info-50);
+              padding: var(--space-4);
+              border-radius: var(--radius-lg);
+              margin-bottom: var(--space-6);
+              border: 1px solid var(--info-200);
+            "
+          >
+            <h3 style="margin: 0 0 var(--space-2) 0; color: var(--info-700)">
+              📊 Pending Changes
+            </h3>
+            <p style="margin: 0; color: var(--info-600)">
+              <strong id="changes-count">0</strong> changes pending commit to
+              JSON file
+            </p>
+            <p
+              style="
+                margin: var(--space-2) 0 0 0;
+                font-size: 0.875rem;
+                color: var(--info-600);
+              "
+            >
+              Changes are stored temporarily. Use "Commit Changes" to save
+              permanently.
+            </p>
+          </div>
+
+          <div
+            style="
+              display: flex;
+              gap: var(--space-4);
+              margin-bottom: var(--space-6);
+              flex-wrap: wrap;
+            "
+          >
+            <button class="btn btn-primary" data-action="commitChanges">
+              ✅ Commit Changes to JSON
+            </button>
+            <button class="btn btn-warning" data-action="discardChanges">
+              🗑️ Discard All Changes
+            </button>
+            <button class="btn btn-ghost" data-action="clearChangeLog">
+              🧹 Clear Log History
+            </button>
+          </div>
+
+          <div id="changelog-list" style="max-height: 500px; overflow-y: auto">
+            <div
+              id="no-changes"
+              style="
+                text-align: center;
+                color: var(--neutral-500);
+                padding: var(--space-8);
+              "
+            >
+              No changes recorded yet. Start adding or editing museums to see
+              changes here.
+            </div>
+          </div>
+        </div>
+
+        <!-- Export Data Panel -->
+        <div id="export-panel" class="admin-panel">
+          <h2>Data Management</h2>
+          <div class="status-message" id="export-status"></div>
+
+          <div
+            style="
+              background: var(--primary-50);
+              padding: var(--space-4);
+              border-radius: var(--radius-lg);
+              margin-bottom: var(--space-6);
+              border: 1px solid var(--primary-200);
+            "
+          >
+            <h3 style="margin: 0 0 var(--space-2) 0; color: var(--primary-700)">
+              📊 Current Data Status
+            </h3>
+            <p style="margin: 0; color: var(--primary-600)">
+              <strong id="museum-count">0</strong> museums loaded from
+              <code>museum_details_full.json</code>
+            </p>
+            <p
+              style="
+                margin: var(--space-2) 0 0 0;
+                font-size: 0.875rem;
+                color: var(--primary-600);
+              "
+            >
+              Changes are saved to browser storage. Use export to save
+              permanently.
+            </p>
+          </div>
+
+          <h3>Export Options</h3>
+          <p>Export your museum data in different formats:</p>
+
+          <div
+            style="
+              display: flex;
+              gap: var(--space-4);
+              margin-top: var(--space-4);
+              flex-wrap: wrap;
+            "
+          >
+            <button class="btn btn-primary" data-action="exportJSON">
+              📄 Export as JSON
+            </button>
+            <button class="btn btn-secondary" data-action="exportCSV">
+              📊 Export as CSV
+            </button>
+            <button class="btn btn-ghost" data-action="showDataPreview">
+              👁️ Preview Data
+            </button>
+          </div>
+
+          <div
+            style="
+              margin-top: var(--space-6);
+              padding: var(--space-4);
+              background: var(--warning-50);
+              border-radius: var(--radius-lg);
+              border: 1px solid var(--warning-200);
+            "
+          >
+            <h4 style="margin: 0 0 var(--space-2) 0; color: var(--warning-700)">
+              ⚠️ Import Data
+            </h4>
+            <p
+              style="
+                margin: 0 0 var(--space-3) 0;
+                color: var(--warning-600);
+                font-size: 0.875rem;
+              "
+            >
+              Upload a JSON file to replace current museum data. This will
+              overwrite all current data.
+            </p>
+            <input
+              type="file"
+              id="import-file"
+              accept=".json"
+              style="margin-bottom: var(--space-3)"
+            />
+            <button class="btn btn-warning btn-sm" data-action="importData">
+              📥 Import JSON File
+            </button>
+          </div>
+
+          <div
+            id="data-preview"
+            style="display: none; margin-top: var(--space-6)"
+          >
+            <h3>Data Preview</h3>
+            <pre
+              id="preview-content"
+              style="
+                background: var(--neutral-50);
+                padding: var(--space-4);
+                border-radius: var(--radius-lg);
+                overflow: auto;
+                max-height: 400px;
+                font-size: 0.875rem;
+              "
+            ></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="scripts/config.js"></script>
+    <script src="scripts/admin.js"></script>
+  </body>
+</html>

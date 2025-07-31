@@ -102,7 +102,6 @@
   line-height: 1.25rem;
   border-radius: var(--radius-lg);
   border: 1px solid transparent;
-  cursor: pointer;
   transition: all var(--transition-fast);
   text-decoration: none;
   white-space: nowrap;
@@ -210,6 +209,8 @@
   border-radius: var(--radius-lg);
   transition: all var(--transition-fast);
 }
+
+/* Specific cursor for interactive input types */
 
 .input:focus {
   outline: none;
